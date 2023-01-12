@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Product>
+
+@foreach (var product in Model)
+{
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card" data-id="@product.CategoryId" card-id="@product.Id">
+            <input type="hidden" class="product-id" value="@product.Id" />
+            <div class="imgBox">
+                <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@product.Id">
+                    <img src="~/assets/images/Product/@product.ProductImages.FirstOrDefault(m=>m.IsMain)?.Image" alt="">
+                </a>
+                <i class="fa-solid fa-heart my-heart"></i>
+                <div class="sale">
+                    Sale
+                </div>
+            </div>
+            <div class="contentBox">
+                <p class="brend">@product.Brend.Name</p>
+                <p class="name">@Html.Raw(product.Name)</p>
+                <h5 class="price">@product.Price.ToString("##.00") €</h5>
+                <a cart-id="@product.Id" class="buy" id="addToCart">Buy Now</a>
+            </div>
+        </div>
+    </div>
+}

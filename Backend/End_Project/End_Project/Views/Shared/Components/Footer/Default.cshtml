@@ -1,0 +1,72 @@
+﻿@model FooterVM
+
+<footer>
+    <section id="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="info">
+                        <h6><b>CATEGORIES</b></h6>
+                        <ul>
+                            <li><a asp-controller="Shop" asp-action="Index">Men :</a></li>
+                            <li><a asp-controller="Shop" asp-action="Index">Women :</a></li>
+                            <li><a asp-controller="Shop" asp-action="Index">Accessories :</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="info">
+                        <h6><b>HELP</b></h6>
+                        <ul>
+                            <li><a href="">Returns :</a></li>
+                            <li><a href="">Shipping :</a></li>
+                            <li><a href="">FAQs :</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="info">
+                        <h6><b>GET IN TOUCH</b></h6>
+                        <span>
+                            Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or
+                            call us on (+994) 50 477 68 79
+                        </span>
+                        <div class="social-area">
+                            <div class="social">
+                                <a href="https://www.facebook.com/">
+                                   @Html.Raw(Model.Settings["Facebook"])
+                                </a>
+                            </div>
+                            <div class="social">
+                                <a href="https://www.instagram.com/">
+                                    @Html.Raw(Model.Settings["Instagram"])
+                                </a>
+                            </div>
+                            <div class="social">
+                                <a href="https://www.pinterest.com/">
+                                    @Html.Raw(Model.Settings["Pinterest"])
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="info">
+                        <h6><b>COZASTORE</b></h6>
+                        <img src="~/assets/images/Logo/@Model.Settings["FooterLogo"]" alt="">
+                        <div class="contact">
+                            <a href="https://www.coza.com.br6">Contact Us :</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="copyright">
+                    <span>
+                        Copyright ©2022 All rights reserved | This site is made with by <a href="https://www.linkedin.com/">Said.</a>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>

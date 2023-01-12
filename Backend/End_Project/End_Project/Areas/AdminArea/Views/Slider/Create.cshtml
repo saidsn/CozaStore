@@ -1,0 +1,48 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container">
+    <div class="row my-5">
+
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h3 style="color:#505668; text-align:center">- Slider Create -</h3>
+
+                    <form asp-controller="Slider" asp-action="Create" class="forms-sample" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+
+                            <div>
+                                <label for="exampleInputUsername1">Image</label>
+                                <input class="form-control" asp-for="Photo">
+                                <span class="text-danger" asp-validation-for="Photo"></span>
+                            </div>
+
+                            <div>
+                                <label for="exampleInputUsername1">Title</label>
+                                <textarea class="form-control rounded-0" asp-for="Title" rows="10"></textarea>
+                                <span class="text-danger" asp-validation-for="Title"></span>
+                            </div>
+
+                            <div>
+                                <label for="exampleInputUsername1">Description</label>
+                                <textarea class="form-control rounded-0" asp-for="Description"  rows="10"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-primary me-2">Create</button>
+                        <a asp-controller="Slider" asp-action="Index" class="btn btn-primary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationPartial" />
+}
+

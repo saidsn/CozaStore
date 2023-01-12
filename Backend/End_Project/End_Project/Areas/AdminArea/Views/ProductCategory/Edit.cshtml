@@ -1,0 +1,34 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="container">
+    <div class="row my-5">
+
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h3 style="color:#505668; text-align:center">- ProductCategory Edit -</h3>
+
+                    <form asp-controller="ProductCategory" asp-action="Edit" class="forms-sample" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div>
+                                <label for="exampleInputUsername1">Name</label>
+                                <input class="form-control rounded-0" asp-for="Name"  rows="10"></input>
+                                <span class="text-danger" asp-validation-for="Name"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Edit</button>
+                        <a asp-controller="ProductCategory" asp-action="Index" class="btn btn-primary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationPartial" />
+ 
+}
+

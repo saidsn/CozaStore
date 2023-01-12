@@ -1,0 +1,179 @@
+﻿@model ProductDetailVM
+
+@{
+    ViewData["Title"] = "ProductDetail";
+}
+
+@{
+    int count = 0;
+}
+
+@section Link{
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+
+    <link rel="stylesheet" href="~/assets/css/product-detail/product-detail.css">
+}
+
+<main>
+
+    @foreach (var header in Model.Headers)
+    {
+        @if (header.Title == "Product-Detail")
+        {
+            <section id="header-area"  style="background-image:url('@Url.Content("~/assets/images/Header/product-detail.image.webp")')">
+                <div class="container">
+                    <div class="row">
+                        <div class="head">
+                            <h1>@header.Title</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+    }
+
+    <section id="product-detail">
+        <div class="container">
+            <div class="row">
+                <div class="card-wrapper">
+                    <div class="card">
+                        <div class="product-imgs">
+                            <div class="img-display">
+                                <div class="img-showcase">
+                                    @foreach (var img in Model.Product.ProductImages)
+                                    {
+                                        <img src="~/assets/images/Product/@img.Image" alt="shoe image">
+                                    }
+
+
+                                </div>
+                            </div>
+                            <div class="img-select">
+                                @foreach (var img in Model.Product.ProductImages)
+                                {
+                                    count++;
+                                    <div class="img-item">
+                                        <a href="#" data-id="@count">
+                                            <img src="~/assets/images/Product/@img.Image" alt="shoe image">
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="product-content basket-product" card-id="@Model.Product.Id">
+                            <input type="hidden" class="product-id" value="@Model.Product.Id" />
+                            <h2 class="product-title">@Html.Raw(Model.Product.Name)</h2>
+
+                            <div class="product-price">
+                                <p class="last-price"> Price: <span>@Model.Product.Price.ToString("##.00") €</span></p>
+                            </div>
+
+                            <div class="about-product">
+                                <h3>About this product: </h3>
+                                <p>
+                                    @Html.Raw(Model.Product.Description)
+                                </p>
+                                <ul>
+                                    <li>Category: <span>@Model.Product.Category.Name</span></li>
+
+                                    <li>Brand: <span>@Model.Product.Brend.Name</span></li>
+                                </ul>
+
+                                <div class="select-option">
+                                    <form action="/action_page.php">
+                                        <label for="sizes">Choose a size:</label>
+                                        <select name="sizes" class="size">
+                                            <option value="size">Select Size</option>
+                                            @foreach (var productSize in Model.Product.ProductSizes)
+                                            {
+                                                if (productSize.ProductId == Model.Product.Id)
+                                                {
+                                                    <option value="size">@productSize.Size.Name</option>
+                                                }
+                                            }
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="purchase-info">
+                                <button type="button" class="my-btn add-to-cart"  card-id="@Model.Product.Id">
+                                    Add to Cart <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+
+                            <div class="social-links">
+                                <p>Share At: </p>
+                                <a href="https://www.facebook.com/">
+                                    @Html.Raw(Model.Settings["Facebook"])
+                                </a>
+
+                                <a href="https://www.instagram.com/">
+                                    @Html.Raw(Model.Settings["Instagram"])
+                                </a>
+
+                                <a href="https://www.pinterest.com/">
+                                    @Html.Raw(Model.Settings["Pinterest"])
+                                </a>
+                            </div>
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="comment-area">
+                                    <h6>LEAVE A COMMENT</h6>
+                                    <form asp-controller="ProductDetail" asp-action="CreateComment" method="post">
+                                        <div class="text">
+                                            <textarea asp-for="@Model.Comment.Content" cols="30" placeholder="Comment..."
+                                                  class="text-area"></textarea>
+                                        </div>
+                                        <input asp-for="@Model.Comment.ProductId" type="hidden" class="product-id" value="@Model.Product.Id" />
+                                        <button type="submit" class="my-btn">Post Comment</button>
+                                    </form>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="comment-description">
+                    <div class="row">
+                        @foreach (var comment in Model.ProductComments)
+                        {
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="comment-body" style="margin-bottom:15px">
+                                    <h5>@comment.AppUser.FullName</h5>
+                                    <span>
+                                     @comment.Content
+                                    </span>
+                            
+                                    <form asp-controller="ProductDetail" asp-action="RemoveComment" asp-route-id="@comment.Id" method="post">
+                                        <button id="deleteBtn" style="margin-left: 82% !important; margin-top:-35px !important" type="submit" class="btn btn-danger">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+</main>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.30/sweetalert2.all.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/706af225b1.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <partial name="_ValidationPartial" />
+
+    <script src="~/assets/js/product-detail.js"></script>
+}
+

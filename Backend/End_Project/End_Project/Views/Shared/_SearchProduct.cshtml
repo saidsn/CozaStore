@@ -1,0 +1,14 @@
+﻿@model List<Product>
+
+@foreach (var item in Model)
+{
+            <li class="search-nameli" style="list-style:none; margin-top:10px;">
+                <a style="color:gray !important;text-decoration:none; " asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">
+                    <img src="~/assets/images/product/@item.ProductImages.FirstOrDefault(m=>m.IsMain).Image" alt="banner" width="100" height="100">
+                <ul style="margin-bottom:30px;padding:0">
+                    <li style="list-style:none;color: #505668">Name: @Html.Raw(item.Name) </li>
+                    <li style="list-style:none;color: #505668"> Price: @item.Price.ToString("##.00")</li>
+                </ul>
+                </a>
+            </li>
+}

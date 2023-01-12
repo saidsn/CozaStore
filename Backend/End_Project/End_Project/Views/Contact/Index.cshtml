@@ -1,0 +1,113 @@
+﻿@model ContactVM
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+@section Link{
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+
+    <link rel="stylesheet" href="~/assets/css/contact/contact.css">
+}
+
+
+<main>
+    @foreach (var header in Model.Headers)
+    {
+        @if (header.Title == "Contact")
+        {
+            <section id="header-area" style="background-image: url(assets/images/Header/@header.Image)">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="head">
+                            <h1>@header.Title</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+    }
+
+    <section id="contact-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 p-0">
+                    <div class="contact">
+                        <div class="center-area">
+                            <div class="head">
+                                <h3>Contact Us</h3>
+                            </div>
+                            <form class="form" asp-controller="Contact" asp-action="Index" method="post">
+                                <div class="form-wrapper">
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="first">Name *</label>
+                                        <input id="first" class="form-input" autocomplete="off" type="text" asp-for="Contact.Name">
+                                        <span class="text-danger" asp-validation-for="Contact.Name"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="last">Email *</label>
+                                        <input id="last" class="form-input" type="email" asp-for="Contact.Email">
+                                        <span class="text-danger" asp-validation-for="Contact.Email"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="color">Subject *</label>
+                                        <input id="color" class="form-input"  type="text" asp-for="Contact.Subject">
+                                        <span class="text-danger" asp-validation-for="Contact.Subject"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="textarea" maxlength="500" type="text"
+                                                  placeholder="Message..." asp-for="Contact.Message"></textarea>
+                                        <span class="text-danger" asp-validation-for="Contact.Message"></span>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="send">Send</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 p-0">
+                    <div class="contact-info">
+                        <div class="info">
+                            <h1>Contact Info</h1>
+                            <span>
+                                <i>
+                                @Html.Raw(Model.ContactInfo.Description)
+                                </i>
+                            </span>
+                            <h1>Call</h1>
+                            <p class="hover">@Html.Raw(Model.ContactInfo.Phone)</p>
+                            <h1>Address</h1>
+                            <p>@Html.Raw(Model.ContactInfo.Address)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 p-0">
+                    <div class="map">
+                        <iframe src="@Model.Map.URL"
+                                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/706af225b1.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <partial name="_ValidationPartial" />
+
+    <script src="~/assets/js/contact.js"></script>
+}

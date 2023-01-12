@@ -1,0 +1,46 @@
+﻿@model Brend
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h3 style="color:#505668; text-align:center">- Brand Edit -</h3>
+
+                    <form asp-controller="Brand" asp-action="Edit" class="forms-sample" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+
+                            <div>
+                                <label for="exampleInputUsername1">Image</label>
+                                <input class="form-control" asp-for="Photo">
+                                <span class="text-danger" asp-validation-for="Photo"></span>
+                            </div>
+
+                            <div>
+                                <label for="exampleInputUsername1">Name</label>
+                                <textarea class="form-control rounded-0" asp-for="Name" id="Name-area" rows="10"></textarea>
+                                <span class="text-danger" asp-validation-for="Name"></span>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-primary me-2">Edit</button>
+                        <a asp-controller="Brand" asp-action="Index" class="btn btn-primary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationPartial" />
+    <script src="~/ckeditor/ckeditor.js"></script>
+
+    <script>
+        CKEDITOR.replace("Name-area")
+    </script>
+}
+

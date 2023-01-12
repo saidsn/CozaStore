@@ -1,0 +1,157 @@
+﻿@model HeaderVM
+
+<header>
+    <section id="navbar-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <nav class="navbar navbar-expand-lg navbar-light nav-color">
+                        <div class="logo">
+                            <a asp-controller="Home" asp-action="Index"><img src="~/assets/images/Logo/@Model.Settings["HeaderLogo"]" style="width:100px" alt=""></a>
+                        </div>
+                        <button class="navbar-toggler my-toggleer" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-center">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" asp-controller="Shop" asp-action="Index">Shop</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" asp-controller="Blog" asp-action="Index">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" asp-controller="About" asp-action="Index">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" asp-controller="Contact" asp-action="Index">Contact</a>
+                                </li>
+                            </ul>
+
+                            <form action="">
+                                <div class="search">
+                                    <input type="text" autocomplete="off" class="input" placeholder="Search" id="searchinp">
+                                    <button type="submit" class="my-btn">
+                                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                                    </button>
+                                </div>
+                            </form>
+
+
+                            <div class="dropdown">
+                                <a href="">
+                                    <button class="dropbtn">My Account</button>
+                                </a>
+
+                                <div class="dropdown-content drop-content">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a>@User.Identity.Name</a>
+                                        <a asp-controller="Account" asp-action="Logout">Logout</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Account" asp-action="Login">Login</a>
+                                        <a asp-controller="Account" asp-action="Register">Register</a>
+                                    }
+
+
+                                </div>
+                            </div>
+
+                            <div class="basket">
+                                <a asp-controller="Basket" asp-action="Index"><i class="fa-solid fa-basket-shopping"><sup id="basketCount">@Model.Count</sup></i></a>
+                            </div>
+
+                            <div class="heart">
+                                <a asp-controller="Heart" asp-action="Index"><i class="fa-regular fa-heart"><sup>0</sup></i></a>
+                            </div>
+                        </div>
+
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="scroll-section">
+        <div class="container inActive">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <nav class="navbar navbar-expand-lg navbar-light nav-color">
+                        <div class="logo">
+                            <a asp-controller="Home" asp-action="Index"><img src="~/assets/images/Logo/@Model.Settings["HeaderLogo"]" style="width:100px" alt=""></a>
+                        </div>
+                        <button class="navbar-toggler my-toggleer" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-center">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" asp-controller="Shop" asp-action="Index">Shop</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" asp-controller="Blog" asp-action="Index">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" asp-controller="About" asp-action="Index">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" asp-controller="Contact" asp-action="Index">Contact</a>
+                                </li>
+                            </ul>
+                            <form action="">
+                                <div class="search">
+                                    <input type="text" autocomplete="off" class="input" placeholder="Search" id="searchinp">
+                                    <button type="submit" class="my-btn">
+                                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div class="dropdown">
+                                <a href="">
+                                    <button class="dropbtn">My Account</button>
+                                </a>
+                                <div class="dropdown-content drop-content">
+                                    <a asp-controller="Account" asp-action="Login">Login</a>
+                                    <a asp-controller="Account" asp-action="Register">Register</a>
+                                    <a href="#">Logout</a>
+                                </div>
+                            </div>
+                            <div class="basket">
+                                <a asp-controller="Basket" asp-action="Index"><i class="fa-solid fa-basket-shopping"><sup id="basketCountsc">@Model.Count</sup></i></a>
+                            </div>
+                            <div class="heart">
+                                <a asp-controller="Heart" asp-action="Index"><i class="fa-regular fa-heart"><sup>0</sup></i></a>
+                            </div>
+                        </div>
+
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</header>
+<div class="container">
+    <div class="row">
+        <div class="search-list">
+           <ul class="d-block search-list-p" id="searchList"></ul>
+        </div>
+    </div>
+</div>
+
+

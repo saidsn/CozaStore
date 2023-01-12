@@ -1,0 +1,116 @@
+﻿
+@model BasketIndexVM
+@{
+    ViewData["Title"] = "Basket";
+
+    decimal endTotal = 0;
+}
+
+@section Link{
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+
+    <link rel="stylesheet" href="~/assets/css/basket/basket.css">
+
+}
+
+
+<main>
+
+
+    <section id="header-area" style="background-image: url('@Url.Content("~/assets/images/Header/heart-image.webp")')">
+        <div class="container">
+            <div class="row">
+                <div class="head">
+                    <h1>@ViewBag.Titles</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="table-area">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-12 d-flex align-items-center h-100">
+                    <div class="card border-0 w-100">
+                        <div class="card-header d-flex justify-content-between align-items-center bg-light pt-4">
+                            <h5 class="card-title h4 mb-0 py-2">Product List</h5>
+                            <a asp-controller="Shop" asp-action="Index">
+                                <button type="button" class="btn btn-secondary my-btn">Add New Product</button>
+                            </a>
+
+                        </div>
+                        <div class="card-body">
+                            <table id="productTable" class="table table-bordered align-middle table-hover">
+                                <thead class="table-color">
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Brand</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                        <th>Setting</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-body">
+                                    @foreach (var basketProduct in Model.BasketProducts)
+                                    {
+                                        <tr class="basket-product" id="@basketProduct.Id">
+                                            <td>
+                                                <img style="width:100px !important;height:100px !important" src="~/assets/images/product/@basketProduct.Image" alt="product image" />
+                                            </td>
+                                            <td>@basketProduct.Name</td>
+                                            <td>@basketProduct.Brand.Name</td>
+                                            <td>
+                                                <span class="product-count" style="margin:10px">@basketProduct.Quantity</span>
+                                            </td>
+
+                                            <td><span class="total-prices">@basketProduct.Price.ToString("##.00") €</span></td>
+
+                                            <td><span class="totals">@basketProduct.Total.ToString("##.00") €</span></td>
+
+                                            <td class ="basket-delete">
+                                                <button data-id="@basketProduct.Id" data-quantity="@basketProduct.Quantity" id="deleteBtn" style="border:none"><i class="fa fa-trash-o delete-icon" style="padding:15px;background:#505668;color:wheat;border-radius:3px!important"></i></button>
+                                            </td>
+                                        </tr>
+                                        endTotal = endTotal + basketProduct.Total;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="total-price">
+                    <h4>Payment :</h4>
+                    <p>Total-Price :</p>
+                    <span>@endTotal.ToString("##.00") €</span>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+</main>
+
+
+@section Scripts{
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.30/sweetalert2.all.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/706af225b1.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/assets/js/basket.js"></script>
+}
+
+
+
+

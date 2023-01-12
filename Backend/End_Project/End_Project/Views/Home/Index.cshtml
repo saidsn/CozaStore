@@ -1,0 +1,178 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Home";
+   
+}
+
+@section Link{
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+
+        <link rel="stylesheet" href="~/assets/css/home/style.css">
+}
+
+
+<main>
+
+    <section id="slider-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 p-0">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            @foreach (var slider in Model.Sliders)
+                            {
+                                <div class="swiper-slide">
+                                    <img src="~/assets/images/Slider/@slider.Image" alt="">
+                                    <div class="slider-detail">
+                                        <p>@Html.Raw(slider.Title)</p>
+                                        <h1>@Html.Raw(slider.Description)</h1>
+                                        <a asp-controller="Shop" asp-action="Index">
+                                            <button type="button" class="my-btn">Shop Now</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="banner-area">
+        <div class="container">
+            <div class="row">
+                @foreach (var banner in Model.Banners)
+                {
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="banner">
+                            <img src="~/assets/images/Banner/@banner.Image" alt="">
+                            <div class="banner-detail">
+                                <h3><b>@Html.Raw(banner.Title)</b></h3>
+                                <p>@Html.Raw(banner.Description)</p>
+                            </div>
+                            <a asp-controller="Shop" asp-action="Index">
+                                <button class="line-btn">SHOP NOW</button>
+                            </a>
+                            <div class="opacity">
+                            </div>
+                        </div>
+
+
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section id="product-areas">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-header">
+                        <h3>OUR PRODUCTS :</h3>
+                    </div>
+                </div>
+                <div class="swiper mySwiper1">
+                    <div class="swiper-wrapper">
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="swiper-slide">
+                                <div class="card" card-id="@product.Id">
+                                      <input type="hidden" class="product-id" value="@product.Id" />
+                                    <div class="imgBox">
+                                        <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@product.Id">
+                                            <img src="~/assets/images/Product/@product.ProductImages.FirstOrDefault(m=>m.IsMain)?.Image" alt="">
+                                        </a>
+                                        <i class="fa-solid fa-heart my-heart"></i>
+                                        <div class="sale">
+                                            Sale
+                                        </div>
+                                    </div>
+                                    <div class="contentBox">
+                                        <p class="brend">@product.Brend.Name</p>
+                                        <p class="name">@Html.Raw(product.Name)</p>
+                                        <h5 class="price">@product.Price.ToString("##.00") €</h5>
+                                        <a cart-id="@product.Id" class="buy" id="addToCart">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="service">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-header">
+                        <h3>OUR SERVICES :</h3>
+                    </div>
+                </div>
+
+                @foreach (var service in Model.Services)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12 service-block">
+                        <div class="service-block-one">
+                            <div class="inner-box">
+                                <div class="icon-box">
+                                    <img src="~/assets/images/Service/@service.Image" alt="">
+                                </div>
+                                <h3><a href="#">@Html.Raw(service.Title)</a></h3>
+                                <p>
+                                   @Html.Raw(service.Description)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </section>
+
+    <section id="brand-area">
+        <div class="container">
+            <h3>OUR BRANDS :</h3>
+            <div class="swiper mySwiper2">
+                <div class="swiper-wrapper">
+                    @foreach (var brend in Model.Brends)
+                    {
+                        <div class="swiper-slide"><img src="~/assets/images/Brand/@brend.Image" alt=""></div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+
+@section Scripts{
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.30/sweetalert2.all.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/706af225b1.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/assets/js/script.js"></script>
+
+    }
+
